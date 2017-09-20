@@ -9,7 +9,7 @@
         <property name="connection.url">jdbc:oracle:thin:@localhost:1521/orcl</property>
         <property name="connection.username">vip</property>
         <property name="connection.password">vip</property>
-        <property name="dialect">org.hibernate.dialect.Oracle12cDialect</property>
+        <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
 
         <property name="hbm2ddl.auto">create</property>
 
@@ -17,7 +17,7 @@
         <property name="format_sql">true</property>
 
         <mapping class="edu.nf.aaa.entity.Boy" />
-        <mapping resource="edu/nf/aaa/entity/Girl.hbm.xml" />
+        <mapping class="edu.nf.aaa.entity.Girl" />
 
     </session-factory>
 </hibernate-configuration>

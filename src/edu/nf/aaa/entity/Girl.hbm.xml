@@ -8,7 +8,9 @@
     <class name="edu.nf.aaa.entity.Girl" table="girl">
 
         <id name="id" column="gid" type="long">
-            <generator class="native" />
+            <!--<generator class="assigned" />-->
+            <!--<generator class="native" />-->
+            <generator class="increment" />
         </id>
 
         <property name="name" column="girl_name" />

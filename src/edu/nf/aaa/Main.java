@@ -14,19 +14,9 @@ public class Main {
         Session session = SessionUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
-//        Girl cat = new Girl();
-//        cat.setName("我收一只猫儿");
-//        session.save(cat);
-
-        Boy tom = new Boy();
-        tom.setName("aaaaa");
-        tom.setAge(22);
-        tom.setAddress("黑龙江");
-        tom.setWeixin("12");
-        session.save(tom);
-
-
-        System.out.println(tom.getHahaah());
+        Girl cat = new Girl();
+        cat.setName("i am a cat");
+        session.save(cat);
 
         transaction.commit();
 

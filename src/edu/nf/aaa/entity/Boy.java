@@ -9,6 +9,7 @@ public final class Boy {
 
     @Id
     @Column(name = "boy_id")
+    @GeneratedValue
     private long id;
 
     @Basic

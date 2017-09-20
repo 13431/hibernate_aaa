@@ -1,28 +1,37 @@
 package edu.nf.aaa.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.TableGenerator;
+
+@Entity
+@GenericGenerator(name = "bbb", strategy = "uuid")
 public class Girl {
 
-    private long id;
+    @Id
+//    @GeneratedValue(generator = "aaaaa2")
+//    @SequenceGenerator(name = "aaaaa2", sequenceName = "seq_girl", allocationSize = 1)
+    @TableGenerator(name = "ccc", valueColumnName = "aaabbbccc", table = "kkk")
+    @GeneratedValue(generator = "ccc")
+    private String id;
+
+    private long sssid;
+
     private String name;
     private String address;
 
     public Girl () {}
 
-    public Girl(long id, String name, String address) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-    }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long gid) {
-        this.id = gid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
