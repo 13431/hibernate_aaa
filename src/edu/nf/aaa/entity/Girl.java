@@ -1,25 +1,28 @@
 package edu.nf.aaa.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
 public class Girl {
 
-    @Id
-    @GeneratedValue
-    private long gid;
-
+    private long id;
     private String name;
-    private String boyFriendName;
+    private String address;
 
-    public long getGid() {
-        return gid;
+    public Girl () {}
+
+    public Girl(long id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
     }
 
-    public void setGid(long gid) {
-        this.gid = gid;
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long gid) {
+        this.id = gid;
     }
 
     public String getName() {
@@ -30,11 +33,11 @@ public class Girl {
         this.name = name;
     }
 
-    public String getBoyFriendName() {
-        return boyFriendName;
+    public String getAddress() {
+        return address;
     }
 
-    public void setBoyFriendName(String boyFriendName) {
-        this.boyFriendName = boyFriendName;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

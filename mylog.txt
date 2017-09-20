@@ -1,0 +1,30 @@
+  ...
+  477  cd share/notes/
+  478  git pull --rebase
+  479  cd ../cases/
+  480  git pull --rebase
+  481  git st
+  482  git add .
+  483  git commit -m 'Java 操作 blob 示例'
+  484  git push
+  ...
+  501  ls
+  502  cd share/tmp/aaa/
+  503  ls
+  504  git init
+  505  ls
+  506  cp ../../cases/.gitignore ./
+  507  cat .gitignore 
+  508  git st
+  509  echo "# Hibernate demo project" >> README.md
+  510  git st
+  511  git add .
+  512  git commit -m 'hibernate demo, first commit'
+  513  git remote add origin git@github.com:13431/hibernate-aaa.git
+  514  git push -u origin master
+  515  git remote remove origin
+  516  git remote add origin git@github.com:13431/hibernate_aaa.git
+  517  git push -u origin master
+  518  git log --stat
+  519  git show
+  520  history > ~/zuoye.txt

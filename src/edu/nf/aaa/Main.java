@@ -4,11 +4,7 @@ import edu.nf.aaa.entity.Boy;
 import edu.nf.aaa.entity.Girl;
 import edu.nf.aaa.util.SessionUtil;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
-import java.util.List;
 
 public class Main {
 
@@ -18,12 +14,19 @@ public class Main {
         Session session = SessionUtil.getSession();
         Transaction transaction = session.beginTransaction();
 
+//        Girl cat = new Girl();
+//        cat.setName("我收一只猫儿");
+//        session.save(cat);
+
         Boy tom = new Boy();
-        tom.setName("jboss");
+        tom.setName("aaaaa");
         tom.setAge(22);
-        tom.setWeixin("888");
-        tom.setAddress("中山");
+        tom.setAddress("黑龙江");
+        tom.setWeixin("12");
         session.save(tom);
+
+
+        System.out.println(tom.getHahaah());
 
         transaction.commit();
 

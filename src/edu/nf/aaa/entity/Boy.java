@@ -1,28 +1,50 @@
 package edu.nf.aaa.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-public class Boy {
+@Table(name = "Boy", schema = "vip")
+public final class Boy {
 
     @Id
-    @GeneratedValue
-    private long bid;
+    @Column(name = "boy_id")
+    private long id;
 
+    @Basic
+    @Column(nullable = false, length = 20, unique = true)
     private String name;
+
+    @Basic
     private int age;
+
+    @Basic
     private String weixin;
+
+    @Basic
     private String phone;
+
+    @Basic
     private String address;
 
-    public long getBid() {
-        return bid;
+    @Temporal(TemporalType.DATE)
+    private Date birth;
+
+    @Transient
+    private String hahaah;
+
+    @OneToOne
+    private Girl myGirlFriend;
+
+
+
+
+    public long getId() {
+        return id;
     }
 
-    public void setBid(long bid) {
-        this.bid = bid;
+    public void setId(long bid) {
+        this.id = bid;
     }
 
     public String getName() {
@@ -30,6 +52,9 @@ public class Boy {
     }
 
     public void setName(String name) {
+        if(name == null || name.trim().length() < 3) {
+            throw new RuntimeException("名字不合法");
+        }
         this.name = name;
     }
 
@@ -64,4 +89,29 @@ public class Boy {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public Date getBirth() {
+        return birth;
+    }
+
+    public void setBirth(Date birth) {
+        this.birth = birth;
+    }
+
+    public String getHahaah() {
+        return name + ":" + address;
+    }
+
+    public void setHahaah(String hahaah) {
+        this.hahaah = hahaah;
+    }
+
+    public Girl getMyGirlFriend() {
+        return myGirlFriend;
+    }
+
+    public void setMyGirlFriend(Girl myGirlFriend) {
+        this.myGirlFriend = myGirlFriend;
+    }
+
 }
