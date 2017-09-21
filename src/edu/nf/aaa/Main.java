@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
         testQueryOfQuery();
     }
-    
+
     // 3
     public static void testQueryOfQuery () {
         Session session = SessionUtil.getSession();
