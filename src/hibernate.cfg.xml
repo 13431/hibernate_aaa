@@ -11,13 +11,14 @@
         <property name="connection.password">vip</property>
         <property name="dialect">org.hibernate.dialect.Oracle10gDialect</property>
 
-        <property name="hbm2ddl.auto">create</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
 
         <mapping class="edu.nf.aaa.entity.Boy" />
         <mapping class="edu.nf.aaa.entity.Girl" />
+        <mapping class="edu.nf.aaa.entity.Fish" />
 
     </session-factory>
 </hibernate-configuration>

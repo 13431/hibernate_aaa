@@ -11,12 +11,12 @@ import javax.persistence.TableGenerator;
 @GenericGenerator(name = "bbb", strategy = "uuid")
 public class Girl {
 
-    @Id
+
 //    @GeneratedValue(generator = "aaaaa2")
 //    @SequenceGenerator(name = "aaaaa2", sequenceName = "seq_girl", allocationSize = 1)
     @TableGenerator(name = "ccc", valueColumnName = "aaabbbccc", table = "kkk")
     @GeneratedValue(generator = "ccc")
-    private String id;
+    @Id private String id;
 
     private long sssid;
 
