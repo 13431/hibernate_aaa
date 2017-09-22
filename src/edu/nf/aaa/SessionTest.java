@@ -5,10 +5,16 @@ import edu.nf.aaa.entity.Fish;
 import edu.nf.aaa.util.SessionUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.jdbc.Work;
 import org.hibernate.query.Query;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class SessionTest {
@@ -16,18 +22,77 @@ public class SessionTest {
     private Session session = null;
     private Transaction transaction = null;
 
-    @Before
-    public void setup() {
-        session = SessionUtil.getSession();
-        transaction = session.beginTransaction();
+
+    @Test
+    public void testDoWork() {
+        session.doWork(new Work() {
+            @Override
+            public void execute(Connection connection) throws SQLException {
+                // 可以将 jdbc 的 Connection 对象暴露出来
+                PreparedStatement ps = connection.prepareStatement("SELECT * FROM fish");
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    System.out.println(rs.getString(2));
+                }
+                rs.close();
+                ps.close();
+            }
+        });
     }
 
-    @After
-    public void last() {
-        if (session.isOpen()) {
-            transaction.commit();
-            session.close();
-        }
+    @Test
+    public void testUpdate() {
+        Fish fish = session.get(Fish.class, 10l);
+
+        session.clear();
+
+        fish.setPrice(777);
+
+        session.flush();
+
+        session.merge(fish);
+    }
+
+    @Test
+    public void testSave() {
+        Fish jinyu = new Fish("jinyu", 111.1f);
+        // session.save(jinyu);
+        jinyu.setId(22222l);
+        session.persist(jinyu); // jpa 给保存的函数起的名字
+    }
+
+    @Test
+    public void testClear() {
+        System.out.println("111");
+        Fish fish01 = session.get(Fish.class, 10l);
+        System.out.println("---------------");
+
+        // session.refresh(fish01);
+        // session.clear();
+        session.evict(fish01);
+        Fish fish02 = session.get(Fish.class, 10l);
+        System.out.println("222");
+    }
+
+    @Test
+    public void testRefresh() {
+        Fish fish = session.get(Fish.class, 10l);
+
+        session.refresh(fish);
+        System.out.println(fish.getPrice());
+    }
+
+    @Test
+    public void testFLush() {
+        Fish liyu = new Fish("liyu", 222f);
+        session.save(liyu);
+
+        session.flush();
+
+        // session.createQuery("from Fish where id = 10").uniqueResult();
+        session.get(Fish.class, 10l).getName();
+
+        System.out.println("ok");
     }
 
     @Test
@@ -79,8 +144,6 @@ public class SessionTest {
         session.load(Fish.class, 10l).getId();
         session.load(Fish.class, 10l).getId();
         session.get(Fish.class, 10l);
-
-
     }
 
 
@@ -94,11 +157,27 @@ public class SessionTest {
         System.out.println(fish1.getName());
     }
 
+
     @Test
     public void testIsExist() {
         // Fish fish = session.load(Fish.class, 111l);
         Fish fish = session.get(Fish.class, 111l);
         System.out.println(fish);
+    }
+
+
+    @Before
+    public void setup() {
+        session = SessionUtil.getSession();
+        transaction = session.beginTransaction();
+    }
+
+    @After
+    public void last() {
+        if (session.isOpen()) {
+            transaction.commit();
+            session.close();
+        }
     }
 
 }
